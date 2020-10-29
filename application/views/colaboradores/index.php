@@ -1,1 +1,1 @@
-<h1>--pagina colaboradores--</h1>
+<h1>--conteúdo página colaboradores--</h1>
