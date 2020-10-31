@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'colaboradores';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['colaboradores'] = 'Colaboradores';
+// $route->add('colaboradores/teste', 'Colaboradores::teste');

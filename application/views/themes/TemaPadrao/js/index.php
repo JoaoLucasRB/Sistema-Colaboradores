@@ -1,9 +1,9 @@
 <script>
     $(document).ready(() => {
-        buildListeners();
+        buildListenersTheme();
     });
 
-    const buildListeners = () => {
+    const buildListenersTheme = () => {
         $(".container-side-menu-action-btn").click(() => addClassActive('.container-side-menu'));
         $(".container-side-menu-item").click(function() {
             if ($(".container-side-menu ").hasClass("active")) {
@@ -11,19 +11,6 @@
                 showSideMenuItemContent($(this));
             }
         });
-        // $(".container-side-menu-item").click(function() {
-        //     if ($(this).hasClass('active'))
-        //         $(this).removeClass('active');
-        //     else
-        //         $(this).addClass('active')
-        // });
-        // $(".side-menu-action-btn").click(() => {
-        //     $containerSideMenu = $(".container-side-menu");
-        //     if ($containerSideMenu.hasClass('active'))
-        //         $containerSideMenu.removeClass('active');
-        //     else
-        //         $containerSideMenu.addClass('active')
-        // });
     }
 
     const addClassActive = (selectorString) => {
