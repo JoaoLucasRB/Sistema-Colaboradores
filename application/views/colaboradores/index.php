@@ -83,6 +83,81 @@
                             </div>
                         </div>
                     </div>
+                    <div class='row'>
+                        <div class='col form-separator'>
+                            <div class='separator half'></div>
+                            <div class='separator-text'>OU</div>
+                            <div class='separator half'></div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="file-upload">
+                                <label class="custom-file-label" for="customFile" data-browse="Buscar" aria-describedby="arquivoHelp">Importar um arquivo CSV</label>
+                                <small id="arquivoHelp" class="form-text text-muted">CSV deve utilizar o delimitador ;</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col container-import'>
+                            <div class='row' style="padding-top: 1em;">
+                                <div class='col-6' style="display: flex; align-items: center;">
+                                    Nome
+                                </div>
+                                <div class='col-6'>
+                                    <select class="form-control" id="csv-nome" name='csv-select'>
+                                        <option value='0' selected>Campo CSV..</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='row' style="padding-top: 1em;">
+                                <div class='col-6' style="display: flex; align-items: center;">
+                                    Altura
+                                </div>
+                                <div class='col-6'>
+                                    <select class="form-control" id="csv-altura" name='csv-select'>
+                                        <option value='0' selected>Campo CSV..</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='row' style="padding-top: 1em;">
+                                <div class='col-6' style="display: flex; align-items: center;">
+                                    Peso
+                                </div>
+                                <div class='col-6'>
+                                    <select class="form-control" id="csv-peso" name='csv-select'>
+                                        <option value='0' selected>Campo CSV..</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='row' style="padding-top: 1em;">
+                                <div class='col-6' style="display: flex; align-items: center;">
+                                    É Atleta?
+                                </div>
+                                <div class='col-6'>
+                                    <select class="form-control" id="csv-atleta" name='csv-select'>
+                                        <option value='0' selected>Campo CSV..</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='row' style="padding-top: 1em;">
+                                <div class='col-6' style="display: flex; align-items: center;">
+                                    Intolerante à lactose?
+                                </div>
+                                <div class='col-6'>
+                                    <select class="form-control" id="csv-lactose" name='csv-select'>
+                                        <option value='0' selected>Campo CSV..</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col container-btn-import'>
+                                    <div class='modal-btn-import'>Importar CSV</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class='modal-btn-close' data-dismiss="modal">Fechar</button>

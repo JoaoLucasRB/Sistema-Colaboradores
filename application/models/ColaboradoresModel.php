@@ -37,4 +37,30 @@ class ColaboradoresModel extends CI_Model
             $this->db->where("$fields[$n] $operators[$n]", $values[$n]);
         }
     }
+
+    public function importCSV($data)
+    {
+        $colaboradores = $data['csvData'];
+        $designatedFields = $data['designatedFields'];
+        $positionReference = array();
+        for ($n = 0; $n < count($colaboradores[0]); $n++) {
+            $positionReference[$n] = $colaboradores[0][$n];
+        }
+        unset($colaboradores[0]);
+        $insertData = array();
+        foreach ($colaboradores as $colaborador) {
+            foreach ($designatedFields as $key => $value) {
+                foreach ($positionReference as $key2 => $value2) {
+                    if ($value2 === $value) {
+                        $colData[$key] = $colaborador[$key2];
+                        break;
+                    }
+                }
+            }
+            $insertData[] = $colData;
+        }
+        foreach ($insertData as $data)
+            $this->db->insert('colaboradores', $data);
+        return true;
+    }
 }

@@ -11,6 +11,13 @@
                 showSideMenuItemContent($(this));
             }
         });
+
+        $(document).ajaxStart(function() {
+            $(".ui-block").show();
+        });
+        $(document).ajaxComplete(function() {
+            $(".ui-block").hide();
+        });
     }
 
     const addClassActive = (selectorString) => {

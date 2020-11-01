@@ -192,15 +192,19 @@
     }
 
     .container-side-menu-item-content>ul>li {
-        color: var(--primary-color);
-        font-size: 1.1em;
         padding-top: 1em;
     }
 
-    .container-side-menu-item-content>ul>li:hover {
-        color: var(--primary-hover);
+    .container-side-menu-item-content>ul>li>a {
+        color: var(--primary-color) !important;
+        font-size: 1.1em;
+    }
+
+    .container-side-menu-item-content>ul>li>a:hover {
+        color: var(--primary-hover) !important;
         font-weight: 500;
         cursor: pointer;
+        text-decoration: none;
     }
 
     .wrapper-section {
@@ -233,5 +237,92 @@
 
     .wrapper-footer>.container-attribution>ul>li a {
         color: #DDA448;
+    }
+
+    .ui-block {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 115vh;
+        z-index: 2000;
+        display: none;
+        cursor: wait;
+    }
+
+    .ui-block .ui-block-bg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #000;
+        opacity: 0.3;
+        z-index: 2001;
+    }
+
+    .ui-block .ui-block-spinner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ui-block .ui-block-spinner .spinner-border {
+        height: 25em;
+        width: 25em;
+        color: var(--primary-color);
+        z-index: 2002;
+    }
+
+    .ui-block .ui-block-spinner .spinner-border.reverse {
+        color: var(--secondary-color);
+        animation-direction: reverse;
+    }
+
+    .ui-block .ui-block-spinner .spinner-border.outer {
+        height: 26em;
+        width: 26em;
+    }
+
+    .ui-block .ui-block-spinner .spinner-border.inner {
+        height: 24em;
+        width: 24em;
+    }
+
+    .dropdown-item:focus {
+        color: var(--secondary-color);
+        background-color: var(--primary-color) !important;
+    }
+
+    .container-profile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em 2em;
+        width: 20em;
+    }
+
+    .profile-icon {
+        border: 2px solid var(--primary-color);
+        width: fit-content;
+        border-radius: 100%;
+    }
+
+    .profile-name {
+        padding-left: 2em;
+    }
+
+    @media (max-height: 720px) {
+        .container-side-menu {
+            height: 118vh;
+        }
+
+        .container-side-menu.active {
+            width: 22vw;
+        }
+
+        .container-side-menu.active>.container-side-menu-item {
+            width: 18vw;
+        }
     }
 </style>

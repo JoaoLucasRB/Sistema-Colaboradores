@@ -252,4 +252,68 @@
         width: 4vh;
         fill: #7d7d7d;
     }
+
+    .form-separator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-separator .separator {
+        width: 100%;
+        border: 1px solid #eee;
+        height: 0;
+    }
+
+    .form-separator .separator.half {
+        width: 50%;
+    }
+
+    .form-separator .separator-text {
+        width: min-content;
+        padding: 1em;
+    }
+
+    .container-import {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+    }
+
+    .container-import.active {
+        height: 31vh;
+    }
+
+    .container-btn-import {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-top: 1em;
+    }
+
+    .modal-btn-import {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        padding: 0.5em 1em;
+        border-radius: 6px;
+        border: 2px solid var(--primary-color);
+        font-weight: 500;
+        width: fit-content;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .modal-btn-import:hover {
+        background-color: var(--primary-hover);
+        cursor: pointer;
+    }
+
+    @media (max-height: 720px) {
+        .dataTables_wrapper .filter svg {
+            padding: 0;
+        }
+
+        .container-import.active {
+            height: 46vh;
+        }
+    }
 </style>

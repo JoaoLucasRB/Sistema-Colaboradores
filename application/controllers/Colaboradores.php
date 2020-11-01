@@ -49,4 +49,11 @@ class Colaboradores extends CI_Controller
 			return $result;
 		$this->load->view('json', array('dataSource' => $result));
 	}
+
+	public function importCSV($data = array(), $array = false)
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST' && empty($data))
+			$data = $this->input->post();
+		$result = $this->ColaboradoresModel->importCSV($data);
+	}
 }

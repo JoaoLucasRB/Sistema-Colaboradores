@@ -1,4 +1,6 @@
 <script>
+    let csvData, oldValues = {};
+
     $(document).ready(() => {
         buildTable();
         buildListeners();
@@ -148,8 +150,92 @@
         $('.container-content').on('click', '.table-item-tool-edit > svg', editColaborador);
         $("#form-add").submit((e) => {
             e.preventDefault();
-            saveColaborador()
+            saveColaborador();
         });
+        $("#file-upload").change(e => {
+            console.log(e);
+            const file = e.target.files[0];
+            $(".custom-file-label").html(file.name)
+            const fileReader = new FileReader();
+            fileReader.onload = readCSV;
+            fileReader.readAsText(file);
+        });
+        $("[name='csv-select']").on('focusin', function() {
+            oldValues[$(this).attr('id')] = $(this).val();
+        });
+        $("[name='csv-select']").change(function() {
+            const selectedValue = $(this).val();
+            const elemName = $(this).attr("id");
+            $("[name='csv-select']").each((index, elem) => {
+                const currentValue = $(elem).val();
+                if (currentValue !== selectedValue)
+                    $(`option[value='${selectedValue}']`, elem).remove();
+                if (oldValues[elemName] !== '0' && !$(`option[value='${oldValues[elemName]}']`, elem).length)
+                    $(elem).append(`<option value='${oldValues[elemName]}'>${oldValues[elemName]}</option>`);
+            });
+        });
+        $(".modal-btn-import").click(importCSV);
+    }
+
+    const readCSV = (e) => {
+        const rows = e.target.result.split("\n");
+        csvData = new Array();
+        for (let row of rows) {
+            const columns = row.split(';');
+            for (let n = 0; n < columns.length; n++) {
+                if (columns[n].includes("*")) {
+                    columns.splice(n);
+                }
+            }
+            csvData.push(columns);
+        }
+        $("[name='csv-select']").each((index, elem) => buildOptionsFromCSV(elem, csvData));
+        $(".container-import").addClass("active");
+    }
+
+    const buildOptionsFromCSV = (elemSelect, csvData, ignore = "") => {
+        const columns = csvData[0];
+        $('option', elemSelect).not("[value='0']").remove();
+        for (let column of columns)
+            if (column !== ignore)
+                $(elemSelect).append(`<option value='${column}'>${column}</option`);
+    }
+
+    const importCSV = () => {
+        const designatedFields = {
+            nome_usuario: $("#csv-nome").val(),
+            altura: $("#csv-altura").val(),
+            peso: $("#csv-peso").val(),
+            atleta: $("#csv-atleta").val(),
+            lactose: $("#csv-lactose").val(),
+        };
+        let validation = true;
+        for (let field in designatedFields) {
+            if (designatedFields[field] === "0") {
+                swal.fire({
+                    icon: 'warning',
+                    title: 'Atenção',
+                    text: 'Selecione pelo menos um campo do csv para cada campo da tabela.',
+                });
+                validation = false;
+                break;
+            }
+        }
+        if(validation) {
+            const data = {
+                csvData,
+                designatedFields
+            }
+            $.ajax({
+            url: "Colaboradores/importCSV",
+            method: "POST",
+            data,
+            success: (successResult) => {
+                console.log('teste');
+            },
+            error: () => {}
+        });
+        }
     }
 
     const loadDataIntoTable = () => {
