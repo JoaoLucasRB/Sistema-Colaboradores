@@ -17,3 +17,7 @@ Back-end:
  - PHP
  - CodeIgniter 3
  - Banco de Dados: SQLite
+
+Requisitos para executar:
+
+ - Servidor PHP 7.2
