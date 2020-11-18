@@ -187,7 +187,8 @@
                     columns.splice(n);
                 }
             }
-            csvData.push(columns);
+            if (!csvData[0] || columns.length >= csvData[0].length)
+                csvData.push(columns);
         }
         $("[name='csv-select']").each((index, elem) => buildOptionsFromCSV(elem, csvData));
         $(".container-import").addClass("active");
@@ -221,26 +222,42 @@
                 break;
             }
         }
-        if(validation) {
+        if (validation) {
             const data = {
                 csvData,
                 designatedFields
             }
             $.ajax({
-            url: "Colaboradores/importCSV",
-            method: "POST",
-            data,
-            success: (successResult) => {
-                console.log('teste');
-            },
-            error: () => {}
-        });
+                url: "index.php/Colaboradores/importCSV",
+                method: "POST",
+                data,
+                success: (successResult) => {
+                if (successResult.data) {
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Sucesso!',
+                        text: 'Os registros foram adicionados.',
+                    }).then(() => {
+                        loadDataIntoTable();
+                        $("#modalAdd").modal('hide');
+                        $('#form-add').trigger("reset");
+                    });
+                } else {
+                    swal.fire({
+                        icon: 'error',
+                        title: 'Oops..',
+                        text: 'Alguma coisa deu errado ao tentar adicionar os registros. Tente novamente.',
+                    });
+                }
+                },
+                error: () => {}
+            });
         }
     }
 
     const loadDataIntoTable = () => {
         $.ajax({
-            url: "Colaboradores/getColaboradores",
+            url: "index.php/Colaboradores/getColaboradores",
             method: "POST",
             data: getFilterData(),
             success: (successResult) => {
@@ -320,7 +337,7 @@
         data.atleta = data.atleta ? 1 : 0;
         data.lactose = data.lactose ? 1 : 0;
         $.ajax({
-            url: "Colaboradores/save",
+            url: "index.php/Colaboradores/save",
             data,
             method: "POST",
             success: (successResult) => {
@@ -355,7 +372,7 @@
     function deleteColaborador() {
         const rowId = $(this).closest('tr').find('td').eq(0).html();
         $.ajax({
-            url: "Colaboradores/remove/" + rowId,
+            url: "index.php/Colaboradores/remove/" + rowId,
             method: "POST",
             success: (successResult) => {
                 if (successResult.data) {
@@ -385,7 +402,7 @@
     function editColaborador() {
         const rowId = $(this).closest('tr').find('td').eq(0).html();
         $.ajax({
-            url: "Colaboradores/getColaboradores",
+            url: "index.php/Colaboradores/getColaboradores",
             dataType: 'json',
             data: {
                 fields: ['colaborador_id'],

@@ -44,6 +44,7 @@ class Colaboradores extends CI_Controller
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST' && empty($data))
 			$data = $this->input->post();
+		unset($data['csv-select']);
 		$result = $this->ColaboradoresModel->save($data);
 		if ($array)
 			return $result;
@@ -55,5 +56,8 @@ class Colaboradores extends CI_Controller
 		if ($this->input->server('REQUEST_METHOD') == 'POST' && empty($data))
 			$data = $this->input->post();
 		$result = $this->ColaboradoresModel->importCSV($data);
+		if ($array)
+			return $result;
+		$this->load->view("json", array('dataSource' => $result));
 	}
 }
